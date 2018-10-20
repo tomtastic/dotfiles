@@ -110,7 +110,7 @@ set printoptions=header:0,duplex:long,paper:letter,syntax:n
 let g:airline_left_sep=' '
 let g:airline_right_sep=' '
 let g:airline_powerline_fonts=0
-set mouse+=a  " Add mouse support for 'all' modes, may require iTerm
+"set mouse+=a  " Add mouse support for 'all' modes, may require iTerm
 if &term =~ '^screen'
     " tmux knows the extended mouse mode
     set ttymouse=xterm2
@@ -183,6 +183,9 @@ let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_perl_checker = 1
+let g:syntastic_perl_checkers=['perl']
+let g:syntastic_yaml_checkers=['yamllint']
 
 " Return to last edit position when opening files, except git commit message
 autocmd BufReadPost *

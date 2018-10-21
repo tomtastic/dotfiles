@@ -6,6 +6,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     export ZSH="/Users/trcm/.oh-my-zsh"
 else
     export ZSH="/home/trcm/.oh-my-zsh"
+    export GPG_TTY="$(tty)"
 fi
 
 # Set name of the theme to load. Optionally, if you set this to "random"

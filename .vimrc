@@ -50,9 +50,9 @@ set cursorline              " Highlight the current line
 set number                  " Show line numbers
 "set wrap                    " Soft wrap at the window width
 "set linebreak               " Break the line on words
-"set textwidth=79            " Break lines at just under 80 characters
+set textwidth=79            " Break lines at just under 80 characters
 if exists('+colorcolumn')
-  set colorcolumn=+1        " Highlight the column after `textwidth`
+  set colorcolumn=+1,100        " Highlight the column after `textwidth`
 endif
 set numberwidth=4           " Width of the line number column
 
@@ -180,12 +180,13 @@ nnoremap <leader>pp :%!python -m json.tool<cr>
 
 " Jump thought errors with :lnext and :lprev
 let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers=['perl']
 let g:syntastic_yaml_checkers=['yamllint']
+let g:syntastic_sh_checkers=['shellcheck']
 
 " Return to last edit position when opening files, except git commit message
 autocmd BufReadPost *

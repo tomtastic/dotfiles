@@ -16,7 +16,7 @@
 # Warn that some commands will not be run if the script is not run as root.
 if [[ $EUID -ne 0 ]]; then
   RUN_AS_ROOT=false
-  printf "Certain commands will not be run without sudo privileges. To run as root, run the same command prepended with 'sudo', for example: $ sudo $0\n\n" | fold -s -w 80
+  print "Certain commands will not be run without sudo privileges. To run as root, run the same command prepended with 'sudo', for example: $ sudo $0\n\n" | fold -s -w 80
 else
   RUN_AS_ROOT=true
   # Update existing `sudo` timestamp until `.osx` has finished
@@ -27,11 +27,16 @@ fi
 # General UI/UX                                                               #
 ###############################################################################
 
-# Set standby delay to 24 hours (default is 1 hour)
+# Set standby delay
 # You can check current values with `pmset -g`.
-#if [[ "$RUN_AS_ROOT" = true ]]; then
-#  sudo pmset -a standbydelay 86400
-#fi
+if [[ "$RUN_AS_ROOT" = true ]]; then
+  # Use 'standbydelayhigh' value when above 75% battery
+  sudo pmset -b highstandbythreshold 75
+  # When battery is above threshold, hibernate after 2 hours sleep
+  sudo pmset -b standbydelayhigh 7200
+  # When battery is below threshold, hibernate after 1 hours sleep
+  sudo pmset -b standbydelaylow 3600
+fi
 
 # Disable system sleep (helpful if you're usually plugged into mains power).
 #if [[ "$RUN_AS_ROOT" = true ]]; then
@@ -365,6 +370,7 @@ if [[ "$RUN_AS_ROOT" = true ]]; then
   # been indexed before.
   # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
 #  sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
+true
 
   # Restart spotlight
 #  killall mds > /dev/null 2>&1

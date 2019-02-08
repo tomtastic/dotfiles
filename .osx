@@ -36,6 +36,8 @@ if [[ "$RUN_AS_ROOT" = true ]]; then
   sudo pmset -b standbydelayhigh 7200
   # When battery is below threshold, hibernate after 1 hours sleep
   sudo pmset -b standbydelaylow 3600
+  # Disable TCPKeepAlive when on battery, it prevents hibernation?!
+  sudo pmset -b tcpkeepalive 0
 fi
 
 # Disable system sleep (helpful if you're usually plugged into mains power).

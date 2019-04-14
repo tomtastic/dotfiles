@@ -173,6 +173,8 @@ nmap <silent> <Leader>j <C-w>J
 nmap <silent> <Leader>d :YcmCompleter GoToDefinition<CR>
 
 nnoremap <leader>pp :%!python -m json.tool<cr>
+nmap <leader>vv :!pandoc -t html -T 'Pandoc Generated - "%"' --smart --standalone --self-contained --data-dir %:p:h -c ~/.dotfiles/css/pandoc.css "%" \|bcat<cr><cr>
+
 
 " }}}-------------------------------------------------------------------------
 "   Configure My Plugins                                                  {{{

@@ -68,9 +68,9 @@ DISABLE_AUTO_UPDATE="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  vim-plug
   osx
 )
+#  vim-plug
 
 source $ZSH/oh-my-zsh.sh
 
@@ -103,6 +103,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias nibbler="ssh -l trcm nibbler.local"
+printzblock () { sudo zdb -ddddd $(df --output=source --type=zfs "$1" | tail -n +2) $(stat -c %i "$1") ; }
 export PATH=$PATH:$HOME/src
 
 

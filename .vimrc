@@ -173,7 +173,7 @@ nmap <silent> <Leader>j <C-w>J
 nmap <silent> <Leader>d :YcmCompleter GoToDefinition<CR>
 
 nnoremap <leader>pp :%!python -m json.tool<cr>
-nmap <leader>vv :!pandoc -t html -T 'Pandoc Generated - "%"' --standalone --self-contained --data-dir %:p:h -c ~/src/dotfiles/css/pandoc.css "%" \|bcat<cr><cr>
+nmap <leader>vv :!pandoc -t html -T 'Pandoc Generated - "%"' --standalone --self-contained --data-dir %:p:h --metadata pagetitle="%" -c ~/src/dotfiles/css/pandoc.css "%" \|bcat<cr><cr>
 
 
 " }}}-------------------------------------------------------------------------

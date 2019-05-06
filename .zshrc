@@ -70,6 +70,7 @@ DISABLE_AUTO_UPDATE="true"
 plugins=(
   git
   osx
+  colored-man-pages
 )
 #  vim-plug
 
@@ -105,6 +106,13 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias nibbler="ssh -l trcm nibbler.local"
 printzblock () { sudo zdb -ddddd $(df --output=source --type=zfs "$1" | tail -n +2) $(stat -c %i "$1") ; }
-export PATH=$PATH:$HOME/src
 
 
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _complete _ignored
+zstyle :compinstall filename '/home/trcm/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall

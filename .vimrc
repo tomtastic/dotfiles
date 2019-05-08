@@ -190,6 +190,7 @@ let g:syntastic_perl_checkers=['perl']
 let g:syntastic_yaml_checkers=['yamllint']
 let g:syntastic_yaml_yamllint_args="-d '{extends: default, rules: {line-length: {max: 100}}}'"
 let g:syntastic_sh_checkers=['sh','shellcheck']
+" let g:syntastic_go_checkers=['gofmt','golint']
 
 " Return to last edit position when opening files, except git commit message
 autocmd BufReadPost *
@@ -307,6 +308,9 @@ command! Cp cp
 
 " Nobody ever uses "Ex" mode, and it's annoying to leave
 noremap Q <nop>
+
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
 
 " }}}-------------------------------------------------------------------------
 "   If there is a per-machine local .vimrc, source it here at the end     {{{

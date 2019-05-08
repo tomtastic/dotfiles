@@ -27,6 +27,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-syntastic/syntastic'
 Plug 'pearofducks/ansible-vim'
 
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 
 filetype plugin indent on                   " required!
 call plug#end()

@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/src:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 if [[ "$(uname -s)" == "Darwin" ]]; then
     export ZSH="/Users/trcm/.oh-my-zsh"
@@ -106,12 +103,17 @@ source $ZSH/oh-my-zsh.sh
 alias nibbler="ssh -l trcm nibbler.local"
 printzblock () { sudo zdb -ddddd $(df --output=source --type=zfs "$1" | tail -n +2) $(stat -c %i "$1") ; }
 
+# Add go to the path
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
 
 # The following lines were added by compinstall
-
 zstyle ':completion:*' completer _complete _ignored
 zstyle :compinstall filename '/home/trcm/.zshrc'
-
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+# If you come from bash you might have to change your $PATH.
+export PATH=$PATH:/usr/lib/go/bin:$HOME/src
+

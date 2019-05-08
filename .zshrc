@@ -104,10 +104,6 @@ source $ZSH/oh-my-zsh.sh
 alias nibbler="ssh -l trcm nibbler.local"
 printzblock () { sudo zdb -ddddd $(df --output=source --type=zfs "$1" | tail -n +2) $(stat -c %i "$1") ; }
 
-# Add go to the path
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-
 # Dont page if less than a page
 export LESS="-F -X $LESS"
 
@@ -118,6 +114,9 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# Add go to the path
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
 # If you come from bash you might have to change your $PATH.
-export PATH=$PATH:/usr/lib/go/bin:$HOME/src
+export PATH=$PATH:/usr/lib/go/bin:$GOBIN:$HOME/src
 

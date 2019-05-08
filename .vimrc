@@ -311,6 +311,7 @@ noremap Q <nop>
 
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <Leader>c  <Plug>(go-coverage-toggle)
 
 " }}}-------------------------------------------------------------------------
 "   If there is a per-machine local .vimrc, source it here at the end     {{{

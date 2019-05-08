@@ -108,6 +108,9 @@ printzblock () { sudo zdb -ddddd $(df --output=source --type=zfs "$1" | tail -n 
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 
+# Dont page if less than a page
+export LESS="-F -X $LESS"
+
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _complete _ignored
 zstyle :compinstall filename '/home/trcm/.zshrc'

@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'captbaritone/molokai'
 Plug 'ajh17/spacegray.vim'
 Plug 'morhetz/gruvbox'
+Plug 'fatih/molokai'
 
 " Fancy statusline
 Plug 'bling/vim-airline'

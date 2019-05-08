@@ -24,9 +24,6 @@ set ttyfast                     " Indicates a fast terminal connection
 "   Visual
 " ----------------------------------------------------------------------------
 
-let g:gruvbox_contrast_dark='hard'
-set background=dark    " Setting dark mode
-"set background=light   " Setting light mode
 
 " Control Area (May be superseded by vim-airline)
 set showcmd                 " Show (partial) command in the last line of the screen.
@@ -86,8 +83,19 @@ set formatoptions=cqrn1
 " Colors
 syntax enable               " This has to come after colorcolumn in order to draw it.
 set t_Co=256                " enable 256 colors
-"colorscheme spacegray
+
+" GruvBox tweaks
+let g:gruvbox_contrast_dark='hard'
+set background=dark    " Setting dark mode
+"set background=light   " Setting light mode
+
+" Molokai tweaks
+let g:rehash256 = 1
+let g:molokai_original = 1
+
 colorscheme gruvbox
+"colorscheme molokai
+"colorscheme spacegray
 
 let g:airline_theme='zenburn'
 
@@ -189,14 +197,27 @@ let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers=['perl']
 let g:syntastic_yaml_checkers=['yamllint']
 let g:syntastic_yaml_yamllint_args="-d '{extends: default, rules: {line-length: {max: 100}}}'"
-let g:syntastic_sh_checkers=['sh','shellcheck']
-" let g:syntastic_go_checkers=['gofmt','golint']
+let g:syntastic_sh_checkers=['sh', 'shellcheck']
+"let g:syntastic_go_checkers=['golint','errcheck']
 
 " vim-go tweaks
 let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
 let g:go_addtags_transform = "camelcase"
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_auto_sameids = 1
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+"let g:go_auto_type_info = 1
+"set updatetime=400
+
 
 " Return to last edit position when opening files, except git commit message
 autocmd BufReadPost *
@@ -260,6 +281,7 @@ autocmd BufNewFile,BufRead *.html set filetype=htmldjango
 autocmd BufNewFile,BufRead .eslintrc set filetype=javascript
 autocmd BufNewFile,BufRead *.es6 set filetype=javascript
 autocmd BufRead,BufNewFile *.py setlocal foldmethod=indent
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
 " Override what is done in /vim/bundle/scss-syntax.vim/ftdetect/scss.vim
 " This should prevent duplicate snippets
@@ -318,6 +340,7 @@ noremap Q <nop>
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <Leader>c  <Plug>(go-coverage-toggle)
+autocmd FileType go nmap <Leader>i  <Plug>(go-info)
 
 " }}}-------------------------------------------------------------------------
 "   If there is a per-machine local .vimrc, source it here at the end     {{{

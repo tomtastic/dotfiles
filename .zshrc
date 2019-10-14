@@ -113,11 +113,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-<<<<<<< Updated upstream
 # GO
-=======
-# Add go to the path
->>>>>>> Stashed changes
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:/usr/lib/go/bin:$HOME/src

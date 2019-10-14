@@ -2,8 +2,8 @@
 [user]
 # Please adapt and uncomment the following lines:
 name = Tom Matthews
-email = info@axiom-partners.com
-	signingkey = 75417A53A9FD3CE1
+email = trcm@pm.me
+	signingkey = BEDD07F86059DC0C
 [commit]
 	gpgsign = true
 [core]

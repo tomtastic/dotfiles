@@ -101,15 +101,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias nibbler="ssh -l trcm nibbler.local"
+alias nibbler="ssh -l trcm nibbler"
+alias hq="ssh -l trcm -p 8443 hq.axiom-partners.com"
+alias kindle="ssh -l root 192.168.2.1"
 printzblock () { sudo zdb -ddddd $(df --output=source --type=zfs "$1" | tail -n +2) $(stat -c %i "$1") ; }
-
-# Add go to the path
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-
-# Dont page if less than a page
-export LESS="-F -X $LESS"
 
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _complete _ignored
@@ -118,6 +113,14 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# If you come from bash you might have to change your $PATH.
+# GO
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
 export PATH=$PATH:/usr/lib/go/bin:$HOME/src
 
+# RUBY
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="$PATH:/usr/local/lib/ruby/gems/2.6.0/bin"
+export LDFLAGS="-L/usr/local/opt/ruby/lib"
+export CPPFLAGS="-I/usr/local/opt/ruby/include"
+export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"

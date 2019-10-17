@@ -101,7 +101,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias nibbler="ssh -l trcm nibbler"
 alias hq="ssh -l trcm -p 8443 hq.axiom-partners.com"
 alias kindle="ssh -l root 192.168.2.1"
 printzblock () { sudo zdb -ddddd $(df --output=source --type=zfs "$1" | tail -n +2) $(stat -c %i "$1") ; }

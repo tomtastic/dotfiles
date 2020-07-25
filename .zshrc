@@ -104,6 +104,7 @@ source $ZSH/oh-my-zsh.sh
 alias hq="ssh -l trcm -p 8443 hq.axiom-partners.com"
 alias kindle="ssh -l root 192.168.2.1"
 alias dup="find /data/docker -maxdepth 2 -type f -name docker-compose.yml -exec grep -H 'image:' {} \;"
+alias l.="ls -d .[^.]*"
 printzblock () { sudo zdb -ddddd $(df --output=source --type=zfs "$1" | tail -n +2) $(stat -c %i "$1") ; }
 
 docker () {

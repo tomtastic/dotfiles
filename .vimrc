@@ -200,6 +200,8 @@ let g:syntastic_yaml_yamllint_args="-d '{extends: default, rules: {line-length: 
 let g:syntastic_sh_checkers=['sh','shellcheck']
 let g:syntastic_go_checkers=['go','gofmt','govet']
 "let g:syntastic_go_checkers=['golint','errcheck']
+let g:syntastic_javascript_checkers=['eslint']
+let g:syntastic_javascript_eslint_generic = 1
 
 " vim-go tweaks
 let g:go_fmt_command = "goimports"

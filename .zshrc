@@ -101,7 +101,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias nibbler="ssh -l trcm nibbler"
 alias hq="ssh -l trcm -p 8443 hq.axiom-partners.com"
 alias kindle="ssh -l root 192.168.2.1"
 alias dup="find /data/docker -maxdepth 2 -type f -name docker-compose.yml -exec grep -H 'image:' {} \;"
@@ -175,8 +174,8 @@ export PATH=$PATH:/usr/lib/go/bin:$HOME/src
 
 # RUBY
 export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="$PATH:/usr/local/lib/ruby/gems/2.6.0/bin"
 export PATH="$PATH:/home/trcm/.local/bin"
+export PATH="$PATH:/usr/local/lib/ruby/gems/2.7.0/bin"
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"
 export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"

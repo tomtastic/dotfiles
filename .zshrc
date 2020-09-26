@@ -103,7 +103,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias hq="ssh -l trcm -p 8443 hq.axiom-partners.com"
 alias kindle="ssh -l root 192.168.2.1"
-printzblock () { sudo zdb -ddddd $(df --output=source --type=zfs "$1" | tail -n +2) $(stat -c %i "$1") ; }
+alias l.='ls -d .[^.]*'
+fat () {
+    du -sk * 2> /dev/null | sort -n | perl -ne 'if ( /^(\d+)\s+(.*$)/){$l=log($1+.1);$m=int($l/log(1024)); printf ("%6.1f\t%s\t%25s | %s\n",($1/(2**(10*$m))),(("K","M","G","T","P")[$m]),"*"x(1.5*$l),$2);}'
+}
 
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _complete _ignored
@@ -111,6 +114,12 @@ zstyle :compinstall filename '/home/trcm/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+# Homebrew
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin
+
+# PYTHON
+export PYTHONPATH=`brew --prefix`/lib/python3.8/site-packages:$PYTHONPATH
 
 # GO
 export GOPATH=$HOME/go
@@ -124,3 +133,11 @@ export PATH="$PATH:/usr/local/lib/ruby/gems/2.7.0/bin"
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"
 export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
+
+# JAVA
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+export CPPFLAGS="-I/usr/local/opt/openjdk@11/include"
+
+# Created by `userpath` on 2020-08-08 09:54:06
+export PATH="$PATH:/Users/trcm/.local/bin"
+

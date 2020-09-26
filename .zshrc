@@ -167,37 +167,53 @@ docker_tag_search () {
   done
 }
 
-# The following lines were added by compinstall
-zstyle ':completion:*' completer _complete _ignored
-zstyle :compinstall filename '/home/trcm/.zshrc'
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# Cater for MacOS and Linux
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    zstyle ':completion:*' completer _complete _ignored
+    zstyle :compinstall filename '/Users/trcm/.zshrc'
+    autoload -Uz compinit
+    compinit
 
-# Homebrew
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin
+    # Homebrew
+    export PATH=$PATH:/usr/local/sbin:/usr/local/bin
 
-# PYTHON
-export PYTHONPATH=$(brew --prefix 2>/dev/null)/lib/python3.8/site-packages:$PYTHONPATH
+    # PYTHON
+    export PYTHONPATH=$(brew --prefix)/lib/python3.8/site-packages:$PYTHONPATH
 
-# GO
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:/usr/lib/go/bin:$GOBIN
+    # RUBY
+    export PATH="/usr/local/opt/ruby/bin:$PATH"
+    export PATH="$PATH:/home/trcm/.local/bin"
+    export PATH="$PATH:/usr/local/lib/ruby/gems/2.7.0/bin"
+    export PATH="/usr/lib/cargo/bin/:$PATH"
+    export LDFLAGS="-L/usr/local/opt/ruby/lib"
+    export CPPFLAGS="-I/usr/local/opt/ruby/include"
+    export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
 
-# RUBY
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="$PATH:/home/trcm/.local/bin"
-export PATH="$PATH:/usr/local/lib/ruby/gems/2.7.0/bin"
-export PATH="/usr/lib/cargo/bin/:$PATH"
-export LDFLAGS="-L/usr/local/opt/ruby/lib"
-export CPPFLAGS="-I/usr/local/opt/ruby/include"
-export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
+    # JAVA
+    export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+    export CPPFLAGS="-I/usr/local/opt/openjdk@11/include"
 
-# JAVA
-export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
-export CPPFLAGS="-I/usr/local/opt/openjdk@11/include"
+    # SRC
+    export PATH="$PATH:/Users/trcm/.local/bin"
+    export PATH="$PATH:/Users/trcm/Documents/src"
 
-# SRC
-export PATH="$PATH:/Users/trcm/.local/bin"
-export PATH="$PATH:/home/trcm/src"
+    # GO
+    export GOPATH=$HOME/go
+    export GOBIN=$GOPATH/bin
+else
+    zstyle ':completion:*' completer _complete _ignored
+    zstyle :compinstall filename '/home/trcm/.zshrc'
+    autoload -Uz compinit
+    compinit
+
+    # SRC
+    export PATH="$PATH:/home/trcm/.local/bin"
+    export PATH="$PATH:/home/trcm/src"
+
+    # GO
+    export PATH=$PATH:/usr/lib/go/bin:$GOBIN
+    export GOPATH=$HOME/go
+    export GOBIN=$GOPATH/bin
+fi
+
+

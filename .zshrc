@@ -103,9 +103,67 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias hq="ssh -l trcm -p 8443 hq.axiom-partners.com"
 alias kindle="ssh -l root 192.168.2.1"
-alias l.='ls -d .[^.]*'
 fat () {
     du -sk * 2> /dev/null | sort -n | perl -ne 'if ( /^(\d+)\s+(.*$)/){$l=log($1+.1);$m=int($l/log(1024)); printf ("%6.1f\t%s\t%25s | %s\n",($1/(2**(10*$m))),(("K","M","G","T","P")[$m]),"*"x(1.5*$l),$2);}'
+}
+alias dup="find /data/docker -maxdepth 2 -type f -name docker-compose.yml -exec grep -H 'image:' {} \;"
+alias l.="ls -d .[^.]*"
+printzblock () {
+    sudo zdb -ddddd $(df --output=source --type=zfs "$1" | tail -n +2) $(stat -c %i "$1") ;
+}
+
+docker () {
+  if [[ "${1}" = "tags" ]]; then
+    docker_tag_search $2
+  else
+    command docker $@
+  fi
+}
+
+docker_tag_search () {
+  # Display help
+  if [[ "${1}" == "" ]]; then
+    echo "Usage: docker tags repo/image"
+    echo "       docker tags image"
+    return
+  fi
+
+  # Full repo/image was supplied
+  if [[ $1 == *"/"* ]]; then
+    name=$1
+
+  # Only image was supplied, default to library/image
+  else
+    name=library/${1}
+  fi
+  printf "Searching first 5 pages of tags for ${name}"
+
+  # Fetch all pages, because the only endpoint supporting pagination params
+  # appears to be tags/lists, but that needs authorization
+  results=""
+  i=0
+  has_more=0
+  while [ $has_more -eq 0 ] && [ $i -lt 5 ]
+  do
+     i=$((i+1))
+     result=$(curl "https://registry.hub.docker.com/v2/repositories/${name}/tags/?page=${i}" 2>/dev/null | jq -r '."results"[]["name"]' 2>/dev/null)
+     has_more=$?
+     if [[ ! -z "${result// }" ]]; then results="${results}\n${result}"; fi
+     printf "."
+  done
+  printf "\n"
+
+  # Sort all tags
+  sorted=$(
+    for tag in "${results}"; do
+      echo $tag
+    done | sort
+  )
+
+  # Print all tags
+  for tag in "${sorted[@]}"; do
+    echo $tag
+  done
 }
 
 # The following lines were added by compinstall
@@ -128,7 +186,7 @@ export PATH=$PATH:/usr/lib/go/bin:$HOME/src
 
 # RUBY
 export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="$PATH:/usr/local/lib/ruby/gems/2.6.0/bin"
+export PATH="$PATH:/home/trcm/.local/bin"
 export PATH="$PATH:/usr/local/lib/ruby/gems/2.7.0/bin"
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"

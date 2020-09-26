@@ -111,6 +111,7 @@ alias l.="ls -d .[^.]*"
 printzblock () {
     sudo zdb -ddddd $(df --output=source --type=zfs "$1" | tail -n +2) $(stat -c %i "$1") ;
 }
+alias banner="figlet"
 
 docker () {
   if [[ "${1}" = "tags" ]]; then
@@ -136,7 +137,7 @@ docker_tag_search () {
   else
     name=library/${1}
   fi
-  printf "Searching first 5 pages of tags for ${name}"
+  printf "Searching first 5 pages of tags for 10 most recent ${name}"
 
   # Fetch all pages, because the only endpoint supporting pagination params
   # appears to be tags/lists, but that needs authorization
@@ -153,11 +154,11 @@ docker_tag_search () {
   done
   printf "\n"
 
-  # Sort all tags
+  # Sort all tags by version
   sorted=$(
     for tag in "${results}"; do
       echo $tag
-    done | sort
+    done | grep -E '[[:digit:]]' | grep -Ev 'arm|amd' | sort -V | tail -10
   )
 
   # Print all tags
@@ -177,17 +178,18 @@ compinit
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin
 
 # PYTHON
-export PYTHONPATH=`brew --prefix`/lib/python3.8/site-packages:$PYTHONPATH
+export PYTHONPATH=$(brew --prefix 2>/dev/null)/lib/python3.8/site-packages:$PYTHONPATH
 
 # GO
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
-export PATH=$PATH:/usr/lib/go/bin:$HOME/src
+export PATH=$PATH:/usr/lib/go/bin:$GOBIN
 
 # RUBY
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$PATH:/home/trcm/.local/bin"
 export PATH="$PATH:/usr/local/lib/ruby/gems/2.7.0/bin"
+export PATH="/usr/lib/cargo/bin/:$PATH"
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"
 export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
@@ -196,6 +198,6 @@ export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
 export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
 export CPPFLAGS="-I/usr/local/opt/openjdk@11/include"
 
-# Created by `userpath` on 2020-08-08 09:54:06
+# SRC
 export PATH="$PATH:/Users/trcm/.local/bin"
-
+export PATH="$PATH:/home/trcm/src"

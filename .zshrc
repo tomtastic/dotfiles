@@ -206,14 +206,19 @@ else
     autoload -Uz compinit
     compinit
 
+    # PYTHON
+    export PYTHONPATH=/usr/local/lib/python3.8/dist-packages:$PYTHONPATH
+
     # SRC
     export PATH="$PATH:/home/trcm/.local/bin"
     export PATH="$PATH:/home/trcm/src"
 
     # GO
-    export PATH=$PATH:/usr/lib/go/bin:$GOBIN
     export GOPATH=$HOME/go
     export GOBIN=$GOPATH/bin
+    export PATH=$PATH:/usr/lib/go/bin:$GOBIN
+
+    source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.zsh
 fi
 
 

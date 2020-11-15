@@ -169,11 +169,6 @@ docker_tag_search () {
 
 # Cater for MacOS and Linux
 if [[ "$(uname -s)" == "Darwin" ]]; then
-    zstyle ':completion:*' completer _complete _ignored
-    zstyle :compinstall filename '/Users/trcm/.zshrc'
-    autoload -Uz compinit
-    compinit
-
     # Homebrew
     export PATH=$PATH:/usr/local/sbin:/usr/local/bin
 
@@ -200,12 +195,12 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     # GO
     export GOPATH=$HOME/go
     export GOBIN=$GOPATH/bin
-else
+
     zstyle ':completion:*' completer _complete _ignored
-    zstyle :compinstall filename '/home/trcm/.zshrc'
+    zstyle :compinstall filename '/Users/trcm/.zshrc'
     autoload -Uz compinit
     compinit
-
+else
     # PYTHON
     export PYTHONPATH=/usr/local/lib/python3.8/dist-packages:$PYTHONPATH
 
@@ -219,6 +214,10 @@ else
     export PATH=$PATH:/usr/lib/go/bin:$GOBIN
 
     source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.zsh
+    zstyle ':completion:*' completer _complete _ignored
+    zstyle :compinstall filename '/home/trcm/.zshrc'
+    autoload -Uz compinit
+    compinit
 fi
 
 

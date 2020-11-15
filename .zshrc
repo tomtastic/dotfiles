@@ -214,6 +214,7 @@ else
     export PATH=$PATH:/usr/lib/go/bin:$GOBIN
 
     source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.zsh
+    unalias gf
     zstyle ':completion:*' completer _complete _ignored
     zstyle :compinstall filename '/home/trcm/.zshrc'
     autoload -Uz compinit

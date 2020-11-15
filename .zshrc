@@ -170,10 +170,12 @@ docker_tag_search () {
 # Cater for MacOS and Linux
 if [[ "$(uname -s)" == "Darwin" ]]; then
     # Homebrew
-    export PATH=$PATH:/usr/local/sbin:/usr/local/bin
+    export PATH="$PATH:/usr/local/sbin:/usr/local/bin"
+    export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
 
     # PYTHON
-    export PYTHONPATH=$(brew --prefix)/lib/python3.8/site-packages:$PYTHONPATH
+    export PYTHONPATH="$(brew --prefix)/lib/python3.8/site-packages:$PYTHONPATH"
+    export PATH="$PATH:/User/trcm/Library/Python/3.8/bin/"
 
     # RUBY
     export PATH="/usr/local/opt/ruby/bin:$PATH"
@@ -185,8 +187,8 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
 
     # JAVA
-    export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
-    export CPPFLAGS="-I/usr/local/opt/openjdk@11/include"
+    export PATH="/usr/local/opt/openjdk/bin:$PATH"
+    export CPPFLAGS="-I/usr/local/opt/openjdk/include"
 
     # SRC
     export PATH="$PATH:/Users/trcm/.local/bin"

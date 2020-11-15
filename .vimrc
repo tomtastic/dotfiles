@@ -41,7 +41,7 @@ if exists("&wildignorecase")
 endif
 
 " Buffer Area Visuals
-set scrolloff=7             " Minimal number of screen lines to keep above and below the cursor.
+set scrolloff=14            " Minimal number of screen lines to keep above and below the cursor.
 set visualbell              " Use a visual bell, don't beep!
 set cursorline              " Highlight the current line
 set number                  " Show line numbers

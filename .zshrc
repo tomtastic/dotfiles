@@ -167,7 +167,7 @@ docker_tag_search () {
   done
 }
 
-# Cater for MacOS and Linux
+# MacOS and Linux specific shell configuration
 if [[ "$(uname -s)" == "Darwin" ]]; then
     # Homebrew
     export PATH=$PATH:/usr/local/sbin:/usr/local/bin
@@ -195,7 +195,14 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     # GO
     export GOPATH=$HOME/go
     export GOBIN=$GOPATH/bin
+    export PATH=$PATH:$GOBIN
 
+    # FZF
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+    # ZSH auto-completion
+    source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.zsh
+    unalias gf
     zstyle ':completion:*' completer _complete _ignored
     zstyle :compinstall filename '/Users/trcm/.zshrc'
     autoload -Uz compinit
@@ -213,6 +220,10 @@ else
     export GOBIN=$GOPATH/bin
     export PATH=$PATH:/usr/lib/go/bin:$GOBIN
 
+    # FZF
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+    # ZSH auto-completion
     source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.zsh
     unalias gf
     zstyle ':completion:*' completer _complete _ignored
@@ -220,5 +231,4 @@ else
     autoload -Uz compinit
     compinit
 fi
-
 

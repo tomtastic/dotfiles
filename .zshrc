@@ -112,6 +112,7 @@ printzblock () {
     sudo zdb -ddddd $(df --output=source --type=zfs "$1" | tail -n +2) $(stat -c %i "$1") ;
 }
 alias banner="figlet"
+alias f='vi `fzf -i`'
 
 docker () {
   if [[ "${1}" = "tags" ]]; then

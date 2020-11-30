@@ -28,10 +28,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Lets get syntastical
 Plug 'vim-syntastic/syntastic'
-Plug 'pearofducks/ansible-vim'
 
+" Language syntax and autocompletions
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
+Plug 'davidhalter/jedi-vim'
 
 filetype plugin indent on                   " required!
 call plug#end()

@@ -81,11 +81,12 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+else
+   #export EDITOR='mvim'
+   export EDITOR='vim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -173,10 +174,11 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     # Homebrew
     export PATH="$PATH:/usr/local/sbin:/usr/local/bin"
     export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
+    source /Users/trcm/.secrets   # HOMEBREW_GITHUB_API_TOKEN
 
     # PYTHON
-    export PYTHONPATH="$(brew --prefix)/lib/python3.8/site-packages:$PYTHONPATH"
-    export PATH="$PATH:/User/trcm/Library/Python/3.8/bin/"
+    export PYTHONPATH="$(brew --prefix)/lib/python3.9/site-packages:$PYTHONPATH"
+    export PATH="$PATH:/User/trcm/Library/Python/3.9/bin/"
 
     # RUBY
     export PATH="/usr/local/opt/ruby/bin:$PATH"

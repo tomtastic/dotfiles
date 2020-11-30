@@ -194,6 +194,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_perl_checker = 1
+let g:syntastic_ruby_checkers=['mri','rubocop']
 let g:syntastic_perl_checkers=['perl']
 let g:syntastic_python_checkers=['pylint','python']
 let g:syntastic_python_python_exec = '/usr/bin/python3'
@@ -204,6 +205,9 @@ let g:syntastic_go_checkers=['go','gofmt','govet']
 "let g:syntastic_go_checkers=['golint','errcheck']
 let g:syntastic_javascript_checkers=['eslint']
 let g:syntastic_javascript_eslint_generic = 1
+
+" jedi-vim tweaks
+let g:jedi#show_call_signatures = "1"
 
 " vim-go tweaks
 let g:go_fmt_command = "goimports"

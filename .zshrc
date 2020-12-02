@@ -173,7 +173,7 @@ docker_tag_search () {
 if [[ "$(uname -s)" == "Darwin" ]]; then
     # Homebrew
     export PATH="$PATH:/usr/local/sbin:/usr/local/bin"
-    export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
+    export PATH="/usr/local/opt/curl/bin:$PATH"
     source /Users/trcm/.secrets   # HOMEBREW_GITHUB_API_TOKEN
 
     # PYTHON

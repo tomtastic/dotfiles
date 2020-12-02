@@ -208,10 +208,13 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     # ZSH auto-completion
     source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.zsh
     unalias gf
+
     if type brew &>/dev/null; then
-        FPATH=$(brew --prefix)/opt/curl/share/zsh/site-functions:$FPATH
-        FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+        export FPATH=$(brew --prefix)/opt/curl/share/zsh/site-functions:$FPATH
+        export FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
     fi
+    export FPATH=$FPATH:~/.zfunc
+
     zstyle ':completion:*' completer _complete _ignored
     zstyle :compinstall filename '/Users/trcm/.zshrc'
     autoload -Uz compinit

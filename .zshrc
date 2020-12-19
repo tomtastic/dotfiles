@@ -171,10 +171,12 @@ docker_tag_search () {
 
 # MacOS and Linux specific shell configuration
 if [[ "$(uname -s)" == "Darwin" ]]; then
+
+    source /Users/trcm/.secrets   # HOMEBREW_GITHUB_API_TOKEN
+
     # Homebrew
     export PATH="$PATH:/usr/local/sbin:/usr/local/bin"
     export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
-    source /Users/trcm/.secrets   # HOMEBREW_GITHUB_API_TOKEN
 
     # PYTHON
     export PYTHONPATH="$(brew --prefix)/lib/python3.9/site-packages:$PYTHONPATH"
@@ -213,6 +215,9 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     autoload -Uz compinit
     compinit
 else
+
+    source /home/trcm/.secrets   # samsung.smartthings.token
+
     # PYTHON
     export PYTHONPATH=/usr/local/lib/python3.8/dist-packages:$PYTHONPATH
 

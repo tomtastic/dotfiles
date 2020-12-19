@@ -29,6 +29,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Lets get syntastical
 Plug 'vim-syntastic/syntastic'
 
+" We might like syntax highlighting for powershell
+Plug 'pprovost/vim-ps1'
+
 " Language syntax and autocompletions
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'davidhalter/jedi-vim'

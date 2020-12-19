@@ -65,9 +65,9 @@ DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  osx
   colored-man-pages
+  git
+  httpie
 )
 #  vim-plug
 
@@ -172,11 +172,16 @@ docker_tag_search () {
 # MacOS and Linux specific shell configuration
 if [[ "$(uname -s)" == "Darwin" ]]; then
 
-    source /Users/trcm/.secrets   # HOMEBREW_GITHUB_API_TOKEN
-
     # Homebrew
     export PATH="$PATH:/usr/local/sbin:/usr/local/bin"
-    export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
+    export PATH="/usr/local/opt/curl/bin:$PATH"
+    source /Users/trcm/.secrets   # HOMEBREW_GITHUB_API_TOKEN
+
+    # OpenSSL
+    export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+    export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+    export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+    export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 
     # PYTHON
     export PYTHONPATH="$(brew --prefix)/lib/python3.9/site-packages:$PYTHONPATH"
@@ -210,12 +215,20 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     # ZSH auto-completion
     source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.zsh
     unalias gf
+
+    if type brew &>/dev/null; then
+        export FPATH=$(brew --prefix)/opt/curl/share/zsh/site-functions:$FPATH
+        export FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+    fi
+    export FPATH=$FPATH:~/.zfunc
+
     zstyle ':completion:*' completer _complete _ignored
     zstyle :compinstall filename '/Users/trcm/.zshrc'
     autoload -Uz compinit
     compinit
 else
 
+    # Homebridge token
     source /home/trcm/.secrets   # samsung.smartthings.token
 
     # PYTHON

@@ -1,45 +1,16 @@
 #compdef vmrun
 # -----------------------------------------------------------------------------
-# Copyright (c) 2014 Spencer McIntyre
-# All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#   * Redistributions of source code must retain the above copyright
-#     notice, this list of conditions and the following disclaimer.
-#   * Redistributions in binary form must reproduce the above copyright
-#     notice, this list of conditions and the following disclaimer in the
-#     documentation and/or other materials provided with the distribution.
-#   * Neither the name of the project nor the
-#     names of its contributors may be used to endorse or promote products
-#     derived from this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-# DISCLAIMED. IN NO EVENT SHALL ZSH-USERS BE LIABLE FOR ANY
-# DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# -----------------------------------------------------------------------------
 # Description
 # -----------
 #
 #  Completion script for VMware's vmrun command (http://www.vmware.com/).
-#
-# -----------------------------------------------------------------------------
-# Authors
-# -------
-#
-#  * Spencer McIntyre
+#  https://docs.vmware.com/en/VMware-Fusion/12/com.vmware.fusion.using.doc \
+#                          /GUID-FF306A59-080E-497E-857D-F45125927FB3.html
 #
 # -----------------------------------------------------------------------------
 # vmrun help
 #
-# vmrun version 1.15.4 build-4352717
+# vmrun version 1.17.0 build-16880131
 #
 # Usage: vmrun [AUTHENTICATION-FLAGS] COMMAND [PARAMETERS]
 #
@@ -49,11 +20,7 @@
 # --------------------
 # These must appear before the command and any command parameters.
 #
-#    -h <hostName>  (not needed for Fusion)
-#    -P <hostPort>  (not needed for Fusion)
 #    -T <hostType> (ws|fusion)
-#    -u <userName in host OS>  (not needed for Fusion)
-#    -p <password in host OS>  (not needed for Fusion)
 #    -vp <password for encrypted virtual machine>
 #    -gu <userName in guest OS>
 #    -gp <password in guest OS>
@@ -94,6 +61,49 @@
 #
 # revertToSnapshot         Path to vmx file     Set VM state to a snapshot
 #                          Snapshot name
+#
+#
+#
+# NETWORKADAPTER COMMANDS  PARAMETERS           DESCRIPTION
+# -----------------------  ----------           -----------
+# listNetworkAdapters      Path to vmx file     List all network adapters in a VM
+#
+#
+# addNetworkAdapter        Path to vmx file     Add a network adapter on a VM
+#                          Network adapter type
+#                          [Host nework]
+#
+#
+# setNetworkAdapter        Path to vmx file     Update a network adapter on a VM
+#                          Network adapter index
+#                          Network adapter type
+#                          [Host network]
+#
+#
+# deleteNetworkAdapter     Path to vmx file     Remove a network adapter on a VM
+#                          Network adapter index
+#
+#
+#
+#
+# HOST NETWORK COMMANDS    PARAMETERS           DESCRIPTION
+# ---------------------    ----------           -----------
+# listHostNetworks                              List all networks in the host
+#
+# listPortForwardings      Host network name    List all available port forwardings on a host network
+#
+#
+# setPortForwarding        Host network name    Add or update a port forwarding on a host network
+#                          Protocol
+#                          Host port
+#                          Guest ip
+#                          Guest port
+#                          [Description]
+#
+# deletePortForwarding     Host network name    Delete a port forwarding on a host network
+#                          Protocol
+#                          Host port
+#
 #
 #
 #
@@ -143,13 +153,13 @@
 #                          Script text
 #
 # deleteFileInGuest        Path to vmx file     Delete a file in Guest OS
-# Path in guest
+#                          Path in guest
 #
 # createDirectoryInGuest   Path to vmx file     Create a directory in Guest OS
-# Directory path in guest
+#                          Directory path in guest
 #
 # deleteDirectoryInGuest   Path to vmx file     Delete a directory in Guest OS
-# Directory path in guest
+#                          Directory path in guest
 #
 # CreateTempfileInGuest    Path to vmx file     Create a temporary file in Guest OS
 #
@@ -157,24 +167,32 @@
 #                          Directory path in guest
 #
 # CopyFileFromHostToGuest  Path to vmx file     Copy a file from host OS to guest OS
-# Path on host             Path in guest
-#
+#                          Path on host
+#                          Path in guest
 #
 # CopyFileFromGuestToHost  Path to vmx file     Copy a file from guest OS to host OS
-# Path in guest            Path on host
-#
+#                          Path in guest
+#                          Path on host
 #
 # renameFileInGuest        Path to vmx file     Rename a file in Guest OS
 #                          Original name
 #                          New name
 #
+# typeKeystrokesInGuest    Path to vmx file     Type Keystrokes in Guest OS
+#                          keystroke string
+#
+# connectNamedDevice       Path to vmx file     Connect the named device in the Guest OS
+#                          device name
+#
+# disconnectNamedDevice    Path to vmx file     Disconnect the named device in the Guest OS
+#                          device name
+#
 # captureScreen            Path to vmx file     Capture the screen of the VM to a local file
-# Path on host
+#                          Path on host
 #
 # writeVariable            Path to vmx file     Write a variable in the VM state
 #                          [runtimeConfig|guestEnv|guestVar]
 #                          variable name
-#                          variable value
 #
 # readVariable             Path to vmx file     Read a variable in the VM state
 #                          [runtimeConfig|guestEnv|guestVar]
@@ -202,6 +220,14 @@
 #                          full|linked
 #                          [-snapshot=Snapshot Name]
 #                          [-cloneName=Name]
+#
+#
+#
+# Template VM COMMANDS     PARAMETERS           DESCRIPTION
+# ---------------------    ----------           -----------
+# downloadPhotonVM         Path for new VM      Download Photon VM
+#
+#
 #
 # Examples:
 #
@@ -322,6 +348,18 @@ _vmrun_command() {
     'deleteSnapshot:Remove a snapshot from a VM'
     'revertToSnapshot:Set VM state to a snapshot'
 
+    # Network Adapter Commands
+    'listNetworkAdapters:List all network adapters in a VM'
+    'addNetworkAdapter:Add a network adapter on a VM'
+    'setNetworkAdapter:Update a network adapter on a VM'
+    'deleteNetworkAdapter:Remove a network adapter on a VM'
+
+    # Host Network Commands
+    'listHostNetworks:List all networks in the host'
+    'listPortForwardings:List all available port forwardings on a host network'
+    'setPortForwarding:Add or update a port forwarding on a host network'
+    'deletePortForwarding:Delete a port forwarding on a host network'
+
     # Guest OS Commands
     'runProgramInGuest:Run a program in Guest OS'
     'fileExistsInGuest:Check if a file exists in Guest OS'
@@ -342,6 +380,9 @@ _vmrun_command() {
     'CopyFileFromHostToGuest:Copy a file from host OS to guest OS'
     'CopyFileFromGuestToHost:Copy a file from guest OS to host OS'
     'renameFileInGuest:Rename a file in Guest OS'
+    'typeKeystrokesInGuest:Type Keystrokes in Guest OS'
+    'connectNamedDevice:Connect the named device in the Guest OS'
+    'disconnectNamedDevice:Disconnect the named device in the Guest OS'
     'captureScreen:Capture the screen of the VM to a local file'
     'writeVariable:Write a variable in the VM state'
     'readVariable:Read a variable in the VM state'
@@ -356,6 +397,9 @@ _vmrun_command() {
     'unregister:Unregister a VM'
     'listRegisteredVM:List registered VMs'
     'deleteVM:Delete a VM'
+
+    # Template VM Commands
+    'downloadPhotonVM:Download Photon VM'
   )
 
   if (( CURRENT == 1 )); then

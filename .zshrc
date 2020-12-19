@@ -176,6 +176,12 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     export PATH="/usr/local/opt/curl/bin:$PATH"
     source /Users/trcm/.secrets   # HOMEBREW_GITHUB_API_TOKEN
 
+    # OpenSSL
+    export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+    export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+    export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+    export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
+
     # PYTHON
     export PYTHONPATH="$(brew --prefix)/lib/python3.9/site-packages:$PYTHONPATH"
     export PATH="$PATH:/User/trcm/Library/Python/3.9/bin/"

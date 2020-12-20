@@ -189,7 +189,7 @@ function grab(){
             done
         fi
     else
-        exit 1
+        false
     fi
 }
 

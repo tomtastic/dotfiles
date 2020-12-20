@@ -169,6 +169,31 @@ docker_tag_search () {
   done
 }
 
+function grab(){
+    if [[ -x /usr/bin/tmux ]]; then
+        declare -A SESSIONS
+        while read -r; do
+            IFS=":" read -r id description <<< "$REPLY"
+            SESSIONS[$id]=$description
+        done 2>/dev/null <<<$(tmux ls 2>/dev/null)
+        if [[ "${#SESSIONS[@]}" -eq 1 ]]; then
+            # If there's only one element, join that session by it's id
+            tmux attach-sess -t "${(k)SESSIONS}";
+        elif [[ "${#SESSIONS[@]}" -gt 1 ]] && [[ -n "$1" ]]; then
+            tmux attach-sess -t "$1";
+        elif [[ "${#SESSIONS[@]}" -gt 1 ]] && [[ ! -n "$1" ]]; then
+            # Otherwise, prompt for the session name
+            echo "Which one?"
+            for key in "${(k)SESSIONS[@]}"; do
+                echo "${key}"
+            done
+        fi
+    else
+        exit 1
+    fi
+}
+
+
 # MacOS and Linux specific shell configuration
 if [[ "$(uname -s)" == "Darwin" ]]; then
 
@@ -254,4 +279,3 @@ else
     autoload -Uz compinit
     compinit
 fi
-

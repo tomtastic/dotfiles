@@ -257,7 +257,7 @@ else
     source /home/trcm/.secrets   # samsung.smartthings.token
 
     # PYTHON
-    export PYTHONPATH=/usr/local/lib/python3.8/dist-packages:$PYTHONPATH
+    export PYTHONPATH=/usr/local/lib/python3.9/dist-packages:$PYTHONPATH
 
     # SRC
     export PATH="$PATH:/home/trcm/.local/bin"

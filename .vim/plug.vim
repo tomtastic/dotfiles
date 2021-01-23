@@ -35,6 +35,7 @@ Plug 'pprovost/vim-ps1'
 " Language syntax and autocompletions
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'davidhalter/jedi-vim'
+Plug 'psf/black', { 'branch': 'stable' }
 
 filetype plugin indent on                   " required!
 call plug#end()
